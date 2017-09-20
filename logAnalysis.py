@@ -13,7 +13,13 @@ query1 = """SELECT articles.slug, COUNT(log.path) as
             log.path = CONCAT('/article/',articles.slug)
             GROUP BY articles.slug ORDER BY topArticle DESC LIMIT 3"""
 
-query2 = "SELECT title FROM articles WHERE author = 1 LIMIT 1"
+query2 = """SELECT authors.name, COUNT(log.path) as topAuthor
+            FROM((log JOIN articles ON log.path =
+            CONCAT('/article/',articles.slug))
+            JOIN authors ON articles.author = authors.id)
+            GROUP BY authors.name
+            ORDER BY topAuthor DESC
+            """
 query3 = "SELECT status FROM log LIMIT 1"
 querys = [query1, query2, query3]
 results = []  # empty list to put the result for each query
@@ -29,6 +35,7 @@ for query in querys:
 # print("\n{}{}\n".format(answers[0], results[0][0][0]))
 # print("{}{}\n".format(answers[1], results[1][0][0]))
 # print("{}{}\n".format(answers[2], results[2][0][0]))
-print(results[0][0])
+print(results[0])
+print (results[1])
 
 connection.close()
