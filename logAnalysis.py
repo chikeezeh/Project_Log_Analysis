@@ -8,7 +8,11 @@ cursor = connection.cursor()
 # SQL querys to be executed
 # The querys are put in a list
 # so multiple querys can be executed by the python code.
-query1 = "SELECT name FROM authors WHERE id =1"
+query1 = """SELECT articles.slug, COUNT(log.path) as
+            topArticle FROM log JOIN articles on
+            log.path = CONCAT('/article/',articles.slug)
+            GROUP BY articles.slug ORDER BY topArticle DESC LIMIT 3"""
+
 query2 = "SELECT title FROM articles WHERE author = 1 LIMIT 1"
 query3 = "SELECT status FROM log LIMIT 1"
 querys = [query1, query2, query3]
@@ -19,11 +23,12 @@ for query in querys:
     # fetch the result of the query
     results.append(cursor.fetchall())
 
-answers = ["Author with id = 1 is: ",
-           "First article by Author 1 is: ", "The first status code is: "]
-# use string format to print answers out.
-print("\n{}{}\n".format(answers[0], results[0][0][0]))
-print("{}{}\n".format(answers[1], results[1][0][0]))
-print("{}{}\n".format(answers[2], results[2][0][0]))
+# answers = ["Author with id = 1 is: ",
+#            "First article by Author 1 is: ", "The first status code is: "]
+# # use string format to print answers out.
+# print("\n{}{}\n".format(answers[0], results[0][0][0]))
+# print("{}{}\n".format(answers[1], results[1][0][0]))
+# print("{}{}\n".format(answers[2], results[2][0][0]))
+print(results[0][0])
 
 connection.close()
