@@ -26,16 +26,19 @@ results = []  # empty list to put the result for each query
 for query in querys:
     #  execute each of the querys
     cursor.execute(query)
-    # fetch the result of the query
+    # fetch the result of the query and add to the end of list results
     results.append(cursor.fetchall())
 
-# answers = ["Author with id = 1 is: ",
-#            "First article by Author 1 is: ", "The first status code is: "]
-# # use string format to print answers out.
-# print("\n{}{}\n".format(answers[0], results[0][0][0]))
-# print("{}{}\n".format(answers[1], results[1][0][0]))
-# print("{}{}\n".format(answers[2], results[2][0][0]))
-print(results[0])
-print (results[1])
-print (results[2])
+
+def presentAns(result):
+    for i in result:
+        if len(result) >= 3:
+            print('\n{} - {} views\n'.format(i[0], i[1]))
+        else:
+            print('{} - {}%\n'.format(i[0], round(i[1], 2)))
+
+presentAns(results[0])
+presentAns(results[1])
+presentAns(results[2])
+
 connection.close()
