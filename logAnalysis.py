@@ -20,7 +20,7 @@ query2 = """SELECT authors.name, COUNT(log.path) as topAuthor
             GROUP BY authors.name
             ORDER BY topAuthor DESC
             """
-query3 = "SELECT status FROM log LIMIT 1"
+query3 = "SELECT dayDate,error FROM errorStatus WHERE error > 1"
 querys = [query1, query2, query3]
 results = []  # empty list to put the result for each query
 for query in querys:
@@ -37,5 +37,5 @@ for query in querys:
 # print("{}{}\n".format(answers[2], results[2][0][0]))
 print(results[0])
 print (results[1])
-
+print (results[2])
 connection.close()
