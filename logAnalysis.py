@@ -30,12 +30,14 @@ for query in querys:
     results.append(cursor.fetchall())
 
 
+# a function that presents the result in a formated way.
 def presentAns(result):
     for i in result:
         if len(result) >= 3:
             print('\n{} - {} views\n'.format(i[0], i[1]))
         else:
             print('{} - {}%\n'.format(i[0], round(i[1], 2)))
+
 
 presentAns(results[0])
 presentAns(results[1])
