@@ -14,19 +14,22 @@ Which are:
 4. On your console use the command ```psql -d news -f newsdata.sql``` to create the database tables into your local database.
 5. The SQL querys require 3 views to solve the problems, type the following codes in your console:
 
-```CREATE VIEW statusTotal AS 
+```
+CREATE VIEW statusTotal AS 
 SELECT log.time::timestamp::date AS dayDate,
 CAST(COUNT(log.status) AS FLOAT) AS 
 statusCount FROM log GROUP BY dayDate;
 ```
 
-```CREATE VIEW statusOK AS 
+```
+CREATE VIEW statusOK AS 
 SELECT log.time::timestamp::date AS dayDate, 
 COUNT(log.status) AS statusCount FROM log 
 WHERE log.status ='200 OK' GROUP BY dayDate;
 ```
 
-```CREATE VIEW errorStatus AS 
+```
+CREATE VIEW errorStatus AS 
 SELECT statusTotal.dayDate,
 (100*(1-(statusOK.statusCount/statusTotal.statusCount))) 
 AS "error" FROM statusTotal JOIN statusOK 
