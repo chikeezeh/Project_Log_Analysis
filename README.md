@@ -14,14 +14,21 @@ Which are:
 4. On your console use the command ```psql -d news -f newsdata.sql``` to create the database tables into your local database.
 5. The SQL querys require 3 views to solve the problems, type the following codes in your console:
 
-```CREATE VIEW statusTotal AS SELECT log.time::timestamp::date as dayDate,
-CAST(COUNT(log.status) AS FLOAT) AS statusCount FROM log GROUP BY dayDate; ```
+```CREATE VIEW statusTotal AS 
+SELECT log.time::timestamp::date AS dayDate,
+CAST(COUNT(log.status) AS FLOAT) AS 
+statusCount FROM log GROUP BY dayDate;```
 
-```CREATE VIEW statusOK AS SELECT log.time::timestamp::date AS dayDate, COUNT(log.status) AS statusCount FROM log WHERE log.status ='200 OK' GROUP BY dayDate; ```
+```CREATE VIEW statusOK AS 
+SELECT log.time::timestamp::date AS dayDate, 
+COUNT(log.status) AS statusCount FROM log 
+WHERE log.status ='200 OK' GROUP BY dayDate;```
 
-```CREATE VIEW errorStatus AS SELECT statusTotal.dayDate,(100*(1-(statusOK.
-statusCount/statusTotal.statusCount))) AS "error" FROM statusTotal JOIN statusO
-K ON statusTotal.dayDate = statusOK.dayDate; ```
+```CREATE VIEW errorStatus AS 
+SELECT statusTotal.dayDate,
+(100*(1-(statusOK.statusCount/statusTotal.statusCount))) 
+AS "error" FROM statusTotal JOIN statusOK 
+ON statusTotal.dayDate = statusOK.dayDate;```
 
 6. Type ```python logAnalysis.py``` on your console to run the program.
 
@@ -54,18 +61,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-
-
-views created for question 3.
-
-create view statusTotal as select log.time::timestamp::date as dayDate,
-cast(count(log.status) as float) as statusCount from log group by dayDate;
-
-create view statusOK as select log.time::timestamp::date as dayDate, cou
-nt(log.status) as statusCount from log where log.status ='200 OK' group by dayD
-ate;
-
-create view errorStatus as select statusTotal.dayDate,(100*(1-(statusOK.
-statusCount/statusTotal.statusCount))) as "error" from statusTotal join statusO
-K on statusTotal.dayDate = statusOK.dayDate;
