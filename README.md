@@ -17,18 +17,21 @@ Which are:
 ```CREATE VIEW statusTotal AS 
 SELECT log.time::timestamp::date AS dayDate,
 CAST(COUNT(log.status) AS FLOAT) AS 
-statusCount FROM log GROUP BY dayDate;```
+statusCount FROM log GROUP BY dayDate;
+```
 
 ```CREATE VIEW statusOK AS 
 SELECT log.time::timestamp::date AS dayDate, 
 COUNT(log.status) AS statusCount FROM log 
-WHERE log.status ='200 OK' GROUP BY dayDate;```
+WHERE log.status ='200 OK' GROUP BY dayDate;
+```
 
 ```CREATE VIEW errorStatus AS 
 SELECT statusTotal.dayDate,
 (100*(1-(statusOK.statusCount/statusTotal.statusCount))) 
 AS "error" FROM statusTotal JOIN statusOK 
-ON statusTotal.dayDate = statusOK.dayDate;```
+ON statusTotal.dayDate = statusOK.dayDate;
+```
 
 6. Type ```python logAnalysis.py``` on your console to run the program.
 
