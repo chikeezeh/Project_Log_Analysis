@@ -39,8 +39,11 @@ def presentAns(result):
             print('{} - {}%\n'.format(i[0], round(i[1], 2)))
 
 
+print('Top three articles by views\n' + '-' * 30)
 presentAns(results[0])
+print('Author rank by Article views\n' + '-' * 30)
 presentAns(results[1])
+print('Dates with more than 1% Error Rate\n' + '-' * 30)
 presentAns(results[2])
 
 connection.close()
