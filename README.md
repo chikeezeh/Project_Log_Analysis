@@ -8,27 +8,27 @@ Which are:
 
 ## **QUICKSTART**
 
-1. To run the program, install Python (version 3) and PostgreSQL (Latest Version)
-2. Download the logAnalysis file to a folder that contains the database file (newsdata.sql)
+1. To run the program, install [Python 3] (https://www.python.org/downloads/) and [PostgreSQL] (https://www.postgresql.org/download/)
+2. Download the [logAnalysis.py](https://github.com/chikeezeh/Project_Log_Analysis/blob/master/logAnalysis.py) file to a folder that contains the database file [newsdata.sql](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip), you will need to unzip the database file.
 3. The program requires the module psycopg2 to work so install that with ```pip install psycopg2```.
 4. On your console use the command ```psql -d news -f newsdata.sql``` to create the database tables into your local database.
 5. The SQL querys require 3 views to solve the problems, type the following codes in your console:
 
-```
+```SQL
 CREATE VIEW statusTotal AS 
-SELECT log.time::timestamp::date AS dayDate,
+SELECT log.time::date AS dayDate,
 CAST(COUNT(log.status) AS FLOAT) AS 
 statusCount FROM log GROUP BY dayDate;
 ```
 
-```
+```SQL
 CREATE VIEW statusOK AS 
 SELECT log.time::timestamp::date AS dayDate, 
 COUNT(log.status) AS statusCount FROM log 
 WHERE log.status ='200 OK' GROUP BY dayDate;
 ```
 
-```
+```SQL
 CREATE VIEW errorStatus AS 
 SELECT statusTotal.dayDate,
 (100*(1-(statusOK.statusCount/statusTotal.statusCount))) 
@@ -36,7 +36,7 @@ AS "error" FROM statusTotal JOIN statusOK
 ON statusTotal.dayDate = statusOK.dayDate;
 ```
 
-6. Type ```python logAnalysis.py``` on your console to run the program.
+6. Type ```python3 logAnalysis.py``` on your console to run the program.
 
 ## **HOW THE PROGRAM WORKS**
 1. To answer the first question, table *articles* and *log* are joined. The slug column in table articles is concatenated with */article/* to match it with the content of column path on table log. log.path is counted and grouped by articles.slug and the results are sorted in descending order.

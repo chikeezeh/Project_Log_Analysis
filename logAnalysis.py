@@ -40,8 +40,10 @@ for query in querys:
     # fetch the result of the query and add to the end of list results
     results.append(cursor.fetchall())
 
-
+connection.close()
 # a function that presents the result in a formated way.
+
+
 def presentAns(result):
     for i in result:
         print('\n{} - {} views\n'.format(i[0], i[1]))
@@ -58,5 +60,3 @@ print('Author rank by Article views\n' + '-' * 30)
 presentAns(results[1])
 print('Dates with more than 1% Error Rate\n' + '-' * 30)
 presentAns3(results[2])
-
-connection.close()
