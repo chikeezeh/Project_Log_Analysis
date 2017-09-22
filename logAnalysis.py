@@ -8,10 +8,10 @@ cursor = connection.cursor()
 # SQL querys to be executed
 # The querys are put in a list
 # so multiple querys can be executed by the python code.
-query1 = """SELECT articles.slug, COUNT(log.path) as
+query1 = """SELECT articles.title, COUNT(log.path) as
             topArticle FROM log JOIN articles on
             log.path = CONCAT('/article/',articles.slug)
-            GROUP BY articles.slug ORDER BY topArticle DESC LIMIT 3"""
+            GROUP BY articles.title ORDER BY topArticle DESC LIMIT 3"""
 
 query2 = """SELECT authors.name, COUNT(log.path) as topAuthor
             FROM((log JOIN articles ON log.path =
