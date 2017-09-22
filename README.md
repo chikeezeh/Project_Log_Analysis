@@ -14,13 +14,12 @@ Which are:
 4. On your console use the command ```psql -d news -f newsdata.sql``` to create the database tables into your local database.
 5. The SQL querys require 3 views to solve the problems, type the following codes in your console:
 
-...```CREATE VIEW statusTotal AS SELECT log.time::timestamp::date as dayDate,
+```CREATE VIEW statusTotal AS SELECT log.time::timestamp::date as dayDate,
 CAST(COUNT(log.status) AS FLOAT) AS statusCount FROM log GROUP BY dayDate; ```
 
-...```CREATE VIEW statusOK AS SELECT log.time::timestamp::date AS dayDate, COUNT(log.status) AS statusCount FROM log WHERE log.status ='200 OK' GROUP BY dayD
-ate; ```
+```CREATE VIEW statusOK AS SELECT log.time::timestamp::date AS dayDate, COUNT(log.status) AS statusCount FROM log WHERE log.status ='200 OK' GROUP BY dayDate; ```
 
-...```CREATE VIEW errorStatus AS SELECT statusTotal.dayDate,(100*(1-(statusOK.
+```CREATE VIEW errorStatus AS SELECT statusTotal.dayDate,(100*(1-(statusOK.
 statusCount/statusTotal.statusCount))) AS "error" FROM statusTotal JOIN statusO
 K ON statusTotal.dayDate = statusOK.dayDate; ```
 
@@ -29,9 +28,9 @@ K ON statusTotal.dayDate = statusOK.dayDate; ```
 ## **HOW THE PROGRAM WORKS**
 1. To answer the first question, table *articles* and *log* are joined. The slug column in table articles is concatenated with */article/* to match it with the content of column path on table log. log.path is counted and grouped by articles.slug and the results are sorted in descending order.
 
-2. A 3 table join is performed here to get a table with the authors name and their artcle view count.
+2. To answer question 2, A 3 table join is performed here to get a table with the authors name and their artcle view count.
 
-3. 3 Views are created as shown above, and the date with error greater than 1% is selected. 
+3. Question 3 employs the 3 views created as shown above, and the date with error greater than 1% is selected. 
 
 ## **LICENSE**
 MIT License
