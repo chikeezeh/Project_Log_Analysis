@@ -14,19 +14,24 @@ except psycopg2.Error:
 # SQL querys to be executed
 # The querys are put in a list
 # so multiple querys can be executed by the python code.
-query1 = """SELECT articles.title, COUNT(log.path) as
-            topArticle FROM log JOIN articles on
-            log.path = CONCAT('/article/',articles.slug)
-            GROUP BY articles.title ORDER BY topArticle DESC LIMIT 3"""
+query1 = """SELECT articles.title, COUNT(log.path) AS
+            topArticle
+            FROM log JOIN articles
+            ON log.path = CONCAT('/article/',articles.slug)
+            GROUP BY articles.title
+            ORDER BY topArticle DESC
+            LIMIT 3;"""
 
-query2 = """SELECT authors.name, COUNT(log.path) as topAuthor
+query2 = """SELECT authors.name, COUNT(log.path) AS topAuthor
             FROM((log JOIN articles ON log.path =
             CONCAT('/article/',articles.slug))
             JOIN authors ON articles.author = authors.id)
             GROUP BY authors.name
-            ORDER BY topAuthor DESC
+            ORDER BY topAuthor DESC;
             """
-query3 = "SELECT dayDate,error FROM errorStatus WHERE error > 1"
+query3 = """SELECT dayDate,error
+            FROM errorStatus
+            WHERE error > 1;"""
 querys = [query1, query2, query3]
 results = []  # empty list to put the result for each query
 for query in querys:
