@@ -1,7 +1,7 @@
 # **OVERVIEW**
 
 
-This project employs SQL and Python to build an internal reporting tool for a newspaper website. The Website presents users with articles written by authors in the front end, at the backend a database collects data based on how the user interacts with the website. The data in the database includes, the different articles accessed, the authors information, and a log table that keeps a record of the when an article was accessed and the http response the website gives the users browser. Our goal in building a reporting tool would answer the following 3 questions:
+This project employs SQL and Python to build an internal reporting tool for a newspaper website. The Website presents users with articles written by authors in the front end, at the backend a database collects data based on how the user interacts with the website. The data in the database includes, the different articles accessed, the authors information, and a log table that keeps a record of when an article was accessed and the http response the website gives the users browser. Our goal in building a reporting tool would answer the following 3 questions:
 1. What are the most popular three articles of all time?
 2. Who are the most popular article authors of all time?
 3. On which days did more than 1% of requests lead to errors?
