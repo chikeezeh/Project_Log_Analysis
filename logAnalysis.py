@@ -2,9 +2,15 @@
 #
 import psycopg2  # module that connects to the database
 # create a connection to the database
-connection = psycopg2.connect(database="news")
-# create a cursor object
-cursor = connection.cursor()
+import sys
+try:
+    connection = psycopg2.connect(database="news")
+    # create a cursor object
+    cursor = connection.cursor()
+except psycopg2.Error:
+    print('Sorry that database does not exist')
+    sys.exit(0)
+
 # SQL querys to be executed
 # The querys are put in a list
 # so multiple querys can be executed by the python code.
