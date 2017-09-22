@@ -8,7 +8,7 @@ Which are:
 
 ## **QUICKSTART**
 
-1. To run the program, install [Python 3] (https://www.python.org/downloads/) and [PostgreSQL] (https://www.postgresql.org/download/)
+1. To run the program, install [Python 3](https://www.python.org/downloads/) and [PostgreSQL](https://www.postgresql.org/download/)
 2. Download the [logAnalysis.py](https://github.com/chikeezeh/Project_Log_Analysis/blob/master/logAnalysis.py) file to a folder that contains the database file [newsdata.sql](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip), you will need to unzip the database file.
 3. The program requires the module psycopg2 to work so install that with ```pip install psycopg2```.
 4. On your console use the command ```psql -d news -f newsdata.sql``` to create the database tables into your local database.
